@@ -6,7 +6,7 @@ import requests, json
 def getCryptoPrice(request, coin):
 
     data = {
-        'apikey': 'D58JS20WFDJQS2GI',
+        'apikey': '<insertkey>',
         'function': 'CURRENCY_EXCHANGE_RATE',
         'from_currency': f'{coin}',
         'to_currency': 'USD'
