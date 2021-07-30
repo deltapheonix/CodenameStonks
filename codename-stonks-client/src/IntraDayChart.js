@@ -50,7 +50,7 @@ function IntraDayChart() {
     
     const xExtents = [min, max + 5];
 
-    const gridHeight = height - margin.top - margin.bottom;
+    const gridHeight = height - margin.top - margin.bottom; //result: 676
 
     const elderRayHeight = 100;
 
@@ -70,6 +70,18 @@ function IntraDayChart() {
     const volumeSeries = (data) => {
       return data.volume;
     };
+
+    const stockData =  function() {
+      let stockHistoryUrl = 'http://localhost:8000/invest/GetStockPriceHistory/';
+      let interval = '15min';
+      let stock = 'TSLA';
+      let request = stockHistoryUrl + stock + '/' + interval;
+      let response = fetch(request)
+      .then((response) => response.json())
+      .then((data) => console.log('Stock Data:', data));
+
+      return response;
+    }
     
 
     return (
@@ -94,6 +106,7 @@ function IntraDayChart() {
             >
               <BarSeries fillStyle={volumeColor} yAccessor={volumeSeries} />
             </Chart>
+            <p>{stockData}</p>
         </ChartCanvas>
     );
 }

@@ -38,5 +38,10 @@ def getStockPriceHistory(request, stock, interval):
     #     "json_pretty": json_pretty,
     # }
     #return render(request, "CryptoOutput.html", context)
-    return JsonResponse(json_data)
+    
+    response = JsonResponse(json_data)
+
+    response["Access-Control-Allow-Origin"] = "http://localhost:3000/"
+
+    return response
 
