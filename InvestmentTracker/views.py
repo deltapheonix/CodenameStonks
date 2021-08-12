@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 import requests
 import json
+import pandas as pd
 
 # insert key before testing
 apikey = '<Insert Private Key>'
@@ -22,8 +23,6 @@ def getCryptoPrice(request, coin):
     return JsonResponse(json_data)
 
 def getStockPriceHistory(request, stock, interval):
-
-
     data = {
         'apikey': f'{apikey}',
         'function': 'TIME_SERIES_INTRADAY',
@@ -34,14 +33,14 @@ def getStockPriceHistory(request, stock, interval):
     r = requests.get("https://www.alphavantage.co/query", params=data)
     json_data = r.json()
     # json_pretty = json.dumps(json_data, sort_keys=True, indent=4)
-    # context = {
-    #     "json_pretty": json_pretty,
+    # context = {$son_pretty,
     # }
     #return render(request, "CryptoOutput.html", context)
-    
-    response = JsonResponse(json_data)
+    timeseries  = json_data['Time Series (15min)']
+    #timeseries_df = pd.DataFrame.from_dict(timeseries, orient='index')
+    #result = timeseries_df.to_json(orient="index")
+    response = JsonResponse(timeseries)
 
     response["Access-Control-Allow-Origin"] = "http://localhost:3000/"
 
     return response
-
