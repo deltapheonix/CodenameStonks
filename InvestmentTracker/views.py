@@ -37,9 +37,12 @@ def getStockPriceHistory(request, stock, interval):
     # }
     #return render(request, "CryptoOutput.html", context)
     timeseries  = json_data['Time Series (15min)']
-    #timeseries_df = pd.DataFrame.from_dict(timeseries, orient='index')
-    #result = timeseries_df.to_json(orient="index")
-    response = JsonResponse(timeseries)
+    df = pd.DataFrame.from_dict(timeseries, orient='index')
+    df["date"] = df.index
+    df.reset_index(drop=True, inplace=True)
+    result = df.to_dict(orient = 'index')
+    
+    response = JsonResponse(result)
 
     response["Access-Control-Allow-Origin"] = "http://localhost:3000/"
 
