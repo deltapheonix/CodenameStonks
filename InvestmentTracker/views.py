@@ -45,8 +45,6 @@ def getStockPriceHistory(request, stock, interval):
     
     response = JsonResponse(result)
 
-    response = JsonResponse(responseDataJson)
-
     response["Access-Control-Allow-Origin"] = "*"
 
     return response
