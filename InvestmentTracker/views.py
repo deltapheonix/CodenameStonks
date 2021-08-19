@@ -32,6 +32,7 @@ def getStockPriceHistory(request, stock, interval):
     }
     r = requests.get("https://www.alphavantage.co/query", params=data)
     json_data = r.json()
+
     # json_pretty = json.dumps(json_data, sort_keys=True, indent=4)
     # context = {$son_pretty,
     # }
@@ -44,6 +45,8 @@ def getStockPriceHistory(request, stock, interval):
     
     response = JsonResponse(result)
 
-    response["Access-Control-Allow-Origin"] = "http://localhost:3000/"
+    response = JsonResponse(responseDataJson)
+
+    response["Access-Control-Allow-Origin"] = "*"
 
     return response

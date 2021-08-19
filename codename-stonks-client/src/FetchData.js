@@ -37,6 +37,7 @@ class FetchData extends React.Component {
     }
 
     render() {
+        let count = 0;
         const { error, isLoaded, items } = this.state;
         if (error) {
           return <div>Error: {error.message}</div>;
@@ -46,8 +47,8 @@ class FetchData extends React.Component {
           return (
             <ul>
               {items.map(item => (
-                <li>
-                  {item}
+                <li key={count++}>
+                  {item.high}{item.low}
                 </li>
               ))}
             </ul>
