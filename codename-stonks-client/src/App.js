@@ -9,7 +9,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <IntraDayChart ></IntraDayChart>
-        <FetchData></FetchData>
+        <FetchData 
+        target='http://localhost:8000/invest/GetStockPriceHistory/' 
+        interval='15min' 
+        stock='TSLA'>
+        </FetchData>
       </header>
     </div>
   );
